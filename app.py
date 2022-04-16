@@ -14,10 +14,19 @@ scores = {
 df = pd.read_csv('scoresheet.csv')
 
 for i in range(len(df)):
-    if len(df.iloc[i]['Second'].split('&')) > 1:
+    if len(df.iloc[i]['First'].split('&')) == 2:
+        scores[df.iloc[i]['First'].split('&')[0]] += 32.5
+        scores[df.iloc[i]['First'].split('&')[1]] += 32.5
+        scores[df.iloc[i]['Third']] += 15
+    elif len(df.iloc[i]['Second'].split('&')) == 2:
         scores[df.iloc[i]['Second'].split('&')[0]] += 20
         scores[df.iloc[i]['Second'].split('&')[1]] += 20
         scores[df.iloc[i]['First']] += 40
+    elif len(df.iloc[i]['Third'].split('&')) == 2:
+        scores[df.iloc[i]['Third'].split('&')[0]] += 7.5
+        scores[df.iloc[i]['Third'].split('&')[1]] += 7.5
+        scores[df.iloc[i]['First']] += 40
+        scores[df.iloc[i]['Second']] += 25
     else:
         scores[df.iloc[i]['First']] += 40
         scores[df.iloc[i]['Second']] += 25
